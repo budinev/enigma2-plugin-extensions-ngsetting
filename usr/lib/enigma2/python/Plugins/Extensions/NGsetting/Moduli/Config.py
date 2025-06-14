@@ -38,19 +38,19 @@ def DownloadSetting():
     list = []
     try:
         import requests
-        link = requests.get('http://www.vhannibal.net/asd.php', headers = {'User-Agent': 'Mozilla/5.0'}).text
+        link = requests.get('https://www.vhannibal.net/asd.php', headers = {'User-Agent': 'Mozilla/5.0'}).text
         xx = re.compile('<td><a href="(.+?)">(.+?)</a></td>.*?<td>(.+?)</td>', re.DOTALL).findall(link)
         for link, name, date in xx:
-            list.append((date, name.replace('Vhannibal ', ''), 'http://www.vhannibal.net/' + link))
+            list.append((date, name.replace('Vhannibal ', ''), 'https://www.vhannibal.net/' + link))
     except ImportError:
-        req = Request('http://www.vhannibal.net/asd.php')
+        req = Request('https://www.vhannibal.net/asd.php')
         req.add_header('User-Agent', 'VAS14')
         response = urlopen(req)
         link = response.read()
         response.close()
         xx = re.compile('<td><a href="(.+?)">(.+?)</a></td>.*?<td>(.+?)</td>', re.DOTALL).findall(link)
         for link, name, date in xx:
-            list.append((date, name.replace('Vhannibal ', ''), 'http://www.vhannibal.net/' + link))
+            list.append((date, name.replace('Vhannibal ', ''), 'https://www.vhannibal.net/' + link))
     except:
         pass
     return list
